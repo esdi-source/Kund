@@ -214,7 +214,7 @@ export default function ProfilePage() {
         </CardContent>
       </Card>
 
-      <Button variant="destructive" variant="outline" className="w-full mt-8" onClick={() => signOut()}>
+      <Button variant="outline" className="w-full mt-8 text-destructive hover:bg-destructive/10 border-destructive/50" onClick={() => signOut()}>
         Sign Out
       </Button>
     </div>
