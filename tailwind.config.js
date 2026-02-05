@@ -7,6 +7,18 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "-apple-system", 
+          "BlinkMacSystemFont", 
+          "Segoe UI", 
+          "Roboto", 
+          "Helvetica", 
+          "Arial", 
+          "sans-serif"
+        ],
+        mono: ["SF Mono", "Menlo", "Monaco", "Courier New", "monospace"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -41,6 +53,13 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        // iOS System Colors
+        'ios-blue': '#007AFF',
+        'ios-green': '#34C759',
+        'ios-red': '#FF3B30',
+        'ios-orange': '#FF9500',
+        'ios-gray': '#8E8E93',
+        'ios-gray6': '#F2F2F7', 
       },
       borderRadius: {
         lg: "var(--radius)",

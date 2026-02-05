@@ -62,38 +62,37 @@ export default function WaterTracker({ date }: WaterTrackerProps) {
   })
 
   return (
-    <Card className="bg-blue-50/50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900">
+    <Card className="border-0 shadow-sm bg-blue-50/50 dark:bg-blue-950/20 overflow-hidden">
       <CardContent className="p-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-            <div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full text-blue-600 dark:text-blue-400">
-                <Droplets size={20} />
+        <div className="flex items-center gap-4">
+            <div className="bg-blue-100 dark:bg-blue-900/50 p-2.5 rounded-full">
+                <Droplets className="text-blue-500 fill-blue-500" size={20} />
             </div>
             <div>
-                <div className="font-bold text-lg">{totalWater} <span className="text-sm font-normal text-muted-foreground">/ {GOAL} ml</span></div>
-                <div className="h-2 w-24 bg-blue-200 dark:bg-blue-900 rounded-full overflow-hidden mt-1">
-                    <div 
-                        className="h-full bg-blue-500" 
-                        style={{ width: `${Math.min(100, (totalWater / GOAL) * 100)}%` }} 
-                    />
+                <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Water Intake</div>
+                <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">{(totalWater / 1000).toFixed(1)}</span>
+                    <span className="text-sm text-muted-foreground font-medium">/ {(GOAL / 1000).toFixed(1)} L</span>
                 </div>
             </div>
         </div>
-        
-        <div className="flex gap-2">
-            <Button 
-                size="icon" 
+
+        <div className="flex items-center gap-3">
+             <Button 
                 variant="outline" 
-                className="h-8 w-8 rounded-full"
+                size="icon" 
+                className="h-10 w-10 border-blue-200 bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 shadow-sm rounded-full active:scale-95 transition-transform"
                 onClick={() => addWater.mutate(-250)}
+                disabled={totalWater <= 0}
             >
-                <Minus size={14} />
+                <Minus size={18} />
             </Button>
             <Button 
-                size="sm" 
-                className="rounded-full bg-blue-500 hover:bg-blue-600 text-white"
+                size="icon" 
+                className="h-10 w-10 bg-blue-500 hover:bg-blue-600 text-white shadow-md shadow-blue-500/20 rounded-full active:scale-95 transition-transform"
                 onClick={() => addWater.mutate(250)}
             >
-                <Plus size={14} className="mr-1" /> 250ml
+                <Plus size={18} />
             </Button>
         </div>
       </CardContent>

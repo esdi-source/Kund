@@ -84,23 +84,31 @@ export default function NutritionPage() {
   const getEntriesForMeal = (meal: string) => entries.filter(e => e.meal_type === meal)
 
   return (
-    <div className="flex flex-col h-full relative">
-      <div className="p-4 space-y-4 flex-1 overflow-y-auto pb-24">
-        <header className="flex justify-between items-center mb-2">
-          <Button variant="ghost" size="icon" onClick={() => setNavDate(d => subDays(d, 1))}>
-            <ChevronLeft size={20} />
-          </Button>
-          <div className="font-semibold text-lg flex flex-col items-center">
-             <span>{format(navDate, 'EEEE')}</span>
-             <span className="text-xs text-muted-foreground font-normal">{format(navDate, 'd MMM yyyy')}</span>
-          </div>
-          <Button variant="ghost" size="icon" onClick={() => setNavDate(d => addDays(d, 1))}>
-            <ChevronRight size={20} />
-          </Button>
-        </header>
+    <div className="flex flex-col h-full relative bg-gray-50/50 dark:bg-black">
+      {/* iOS Large Header Style */}
+      {activeTab === 'overview' && (
+        <div className="pt-2 sticky top-0 bg-background/80 backdrop-blur-xl z-10 border-b border-border/40 pb-2">
+            <header className="px-5 mb-1 flex justify-between items-end">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground">Nutrition</h1>
+                <div className="flex items-center gap-1 bg-secondary/50 rounded-lg p-0.5">
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setNavDate(d => subDays(d, 1))}>
+                        <ChevronLeft size={16} />
+                    </Button>
+                    <div className="text-xs font-semibold px-2 min-w-[80px] text-center">
+                        {format(navDate, 'EEE, d MMM')}
+                    </div>
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setNavDate(d => addDays(d, 1))}>
+                        <ChevronRight size={16} />
+                    </Button>
+                </div>
+            </header>
+        </div>
+      )}
+
+      <div className="p-5 space-y-6 flex-1 overflow-y-auto pb-32">
 
         {activeTab === 'overview' && (
-          <div className="space-y-6">
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <DailySummary 
                 entries={entries} 
                 burnedCalories={burnedCalories}
@@ -109,7 +117,7 @@ export default function NutritionPage() {
             
             <WaterTracker date={currentDateString} />
 
-            <div className="space-y-6">
+            <div className="space-y-6 pb-6">
                 <MealSection 
                     title="Breakfast" 
                     entries={getEntriesForMeal('breakfast')} 
